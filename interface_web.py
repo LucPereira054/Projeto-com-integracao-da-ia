@@ -9,17 +9,17 @@ if st.button("Adcionar"):
     st.success("Tarefa adcionada")
 
 
-if 'tarefas' not in st.session_state:
-    st.session_state.tarefas=listar_tarefas()
+if "tarefas" not in st.session_state:
+    st.session_state['tarefas']=listar_tarefas()
 
-tarefas=st.session_state.tarefas
+tarefas=st.session_state['tarefas']
 
 st.subheader("Suas tarefas: ")
 if not tarefas:
     st.write("Nenhuma tarefa na lista neste momento.")
 else:
-    for index,t in enumerate(tarefas,start=1):
-        status="feito" if t['status']=='concluída' else" ainda não feita."
+    for index,t in enumerate(st.session_state['tarefas'],start=1):
+        status="feito" if t['status']=='concluida' else" ainda não feita."
         st.write(f"{index}. {t['descricao']} - {status}")
 
 st.divider()
@@ -47,12 +47,9 @@ idx_para_concluir=st.number_input("Número da tarefa para marcar como concluida:
                                   ,min_value=1,max_value=max_val,step=1)
 
 if st.button("Marcar como concluida"):
-    if not tarefas:
-        st.warning("Não há tarefas para concluir.")
-    elif marcar_concluida(idx_para_concluir):
-        st.session_state.tarefas=listar_tarefas()
-        st.success("tarefa atualizada com sucesso!")
+    sucesso=marcar_concluida(st.session_state['tarefas'], idx_para_concluir)
+    if sucesso:
+        st.success("Tarefa atualizada com sucesso!")
         st.rerun()
     else:
-        st.error("ìndice inválido ou erro ao concluir.")
-
+        st.error("Índice invlálido ou erro ao concluir.")

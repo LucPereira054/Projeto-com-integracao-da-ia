@@ -22,14 +22,12 @@ def listar_tarefas():
     return tarefas
 
 
-def marcar_concluida(index):
-    idx_corrigido=index-1
-    if 0<=idx_corrigido<len(tarefas):
-        tarefas[idx_corrigido]["status"]="concluida"
-        return True
-    return False
-
-
+def marcar_concluida(lista,index):
+   idx_corrigido=index-1
+   if 0<=idx_corrigido<len(lista):
+       lista[idx_corrigido]["status"]="concluida"
+       return True
+   return False
 
 
 
