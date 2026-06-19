@@ -1,0 +1,25 @@
+name: Testes Automáticos da IA
+
+# 1. Quando o robô deve acordar?
+on: [push, pull_request]
+
+# 2. O que o robô deve fazer?
+jobs:
+  test:
+    runs-on: ubuntu-latest 
+    
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v3
+        
+      - name: Configurar o Python na máquina
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          
+      - name: Instalar as dependências do projeto
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Executar o Pytest
+        run: pytest test_ai.py
