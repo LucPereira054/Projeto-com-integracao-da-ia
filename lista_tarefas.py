@@ -4,12 +4,9 @@ from openai import OpenAI
 
 load_dotenv()
 
-client = OpenAI(
-    base_url="https://api.groq.com/openai/v1/",
-    api_key=os.environ.get("GROQ_API_KEY")
-)
+api_key_env = os.getenv("OPENAI_API_KEY", "chave_fake_para_testes")
 
-
+client = OpenAI(api_key=api_key_env)
 
 tarefas=[]
 
